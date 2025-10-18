@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Website Location Alvin</title>
+  <style>
+    :root {
+      --bg1: #0f0c29;
+      --bg2: #302b63;
+      --bg3: #24243e;
+      --accent1: #ff66c4;
+      --accent2: #00bcd4;
+      --glass: rgba(255, 255, 255, 0.1);
+      --text: #f0f0f5;
+      --muted: #b8b8cc;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 24px;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      text-align: center;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    p {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    input {
+      flex: 1;
+      min-width: 220px;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      font-size: 1rem;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
+    }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      color: #fff;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 102, 196, 0.4);
+    }
+
+    button.ghost {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--muted);
+    }
+
+    .results {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: background 0.2s;
+    }
+
+    .card:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .card b {
+      font-size: 1.1rem;
+      display: block;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .muted {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    .bottom-tools {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .bottom-tools button,
+    .bottom-tools a {
+      font-size: 0.9rem;
+    }
+
+    pre {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 10px;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 18px;
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 3px solid rgba(255,255,255,0.15);
+      border-top-color: var(--accent2);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌐 Website Location</h1>
+    <p>Track Location Accurately</p>
+
+    <div class="controls">
+      <input id="ipInput" placeholder="Insert IP Address" />
+      <button id="searchBtn">Search</button>
+      <button id="autoBtn">My Location</button>
+    </div>
+
+    <div id="loading" style="display:none; text-align:center;">
+      <span class="spinner"></span> <span>Sedang Memuat Data...</span>
+    </div>
+
+    <div id="results" class="results">
+      <div class="grid">
+        <div class="card"><b id="ip">-</b><div class="muted">IP Address</div></div>
+        <div class="card"><b id="org">-</b><div class="muted">ISP / ASN</div></div>
+        <div class="card"><b id="loc">-</b><div class="muted">Country & City</div></div>
+        <div class="card"><b id="postal">-</b><div class="muted">Post Code</div></div>
+        <div class="card"><b id="latlon">-</b><div class="muted">Coordinates</div></div>
+        <div class="card"><b id="tz">-</b><div class="muted">Time Zone</div></div>
+      </div>
+
+      <iframe id="map" src=""></iframe>
+
+      <div class="bottom-tools">
+        <button id="copyBtn" class="ghost">📋 Copy Code</button>
+        <a id="osmLink" href="#" target="_blank" class="ghost"></a>📡 Buka di Google Maps</a>
+      </div>
+
+      <pre id="raw">-</pre>
+    </div>
+
+    <footer>Website Location Alvin<a href="https://ipapi.co/" target="_blank" style="color:var(--accent2);text-decoration:none;"></a></footer>
+  </div>
+
+<script>
+  const ipInput = document.getElementById("ipInput");
+  const searchBtn = document.getElementById("searchBtn");
+  const autoBtn = document.getElementById("autoBtn");
+  const loading = document.getElementById("loading");
+  const results = document.getElementById("results");
+  const ipEl = document.getElementById("ip");
+  const orgEl = document.getElementById("org");
+  const locEl = document.getElementById("loc");
+  const postalEl = document.getElementById("postal");
+  const latlonEl = document.getElementById("latlon");
+  const tzEl = document.getElementById("tz");
+  const rawEl = document.getElementById("raw");
+  const mapEl = document.getElementById("map");
+  const osmLink = document.getElementById("osmLink");
+  const copyBtn = document.getElementById("copyBtn");
+
+  async function lookup(ip = "") {
+    loading.style.display = "block";
+    results.style.display = "none";
+    try {
+      const url = ip ? `https://ipapi.co/${encodeURIComponent(ip)}/json/` : `https://ipapi.co/json/`;
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data.error) throw new Error(data.reason);
+
+      ipEl.textContent = data.ip || "-";
+      orgEl.textContent = data.org || "-";
+      locEl.textContent = `${data.city || "-"}, ${data.country_name || "-"}`;
+      postalEl.textContent = data.postal || "-";
+      latlonEl.textContent = `${data.latitude || "-"}, ${data.longitude || "-"}`;
+      tzEl.textContent = data.timezone || "-";
+      rawEl.textContent = JSON.stringify(data, null, 2);
+
+      if (data.latitude && data.longitude) {
+        const lat = data.latitude, lon = data.longitude;
+        mapEl.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lon-0.04}%2C${lat-0.04}%2C${lon+0.04}%2C${lat+0.04}&layer=mapnik&marker=${lat}%2C${lon}`;
+        osmLink.href = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=12/${lat}/${lon}`;
+      } else {
+        mapEl.src = "";
+      }
+
+      results.style.display = "block";
+    } catch (err) {
+      alert("Gagal Memuat Data: " + err.message);
+    } finally {
+      loading.style.display = "none";
+    }
+  }
+
+  searchBtn.onclick = () => lookup(ipInput.value.trim());
+  autoBtn.onclick = () => lookup();
+
+  copyBtn.onclick = async () => {
+    await navigator.clipboard.writeText(rawEl.textContent);
+    copyBtn.textContent = "✅ Disalin!";
+    setTimeout(() => (copyBtn.textContent = "📋 Copy Code"), 1500);
+  };
+
+  // Auto load IP pengguna saat pertama kali dibuka
+  window.addEventListener("load", () => lookup());
+</script>
+</body>
+</html>
